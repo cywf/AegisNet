@@ -9,6 +9,8 @@ Auth: Kylo Parisher (cywf)
 Note: for reseach purposes only
 -->
 
+![alt-text](assets/aegisnet.png)
+
 ## Overview
 
 AegisNet is an advanced defense product solution that integrates several cutting-edge technologies. Our goal is to provide a comprehensive system that combines situational awareness, advanced detection surveillance, autonomous drone software, and more into a unified platform.
