@@ -2,44 +2,44 @@
 // PROVIDERS CONFIGURATION //
 // ----------------------- //
 
-// if your using aws
+// AWS -------------------- //
 
 //provider "aws" {
 //  region = "us-east-1"
 //}
 
-// if your using azure
+// Azure ------------------ //
 
 //provider "azurerm" {
 //  features {}
 //}
 
-// if your using google cloud
+// Google Cloud ----------- //
 
 //provider "google" {
 //  region = "us-central1"
 //  zone   = "us-central1-c"
 //}
 
-// if your using digital ocean
+// Digital Ocean ---------- //
 
 //provider "digitalocean" {
 //  region = "us-east-1"
 //}
 
-// if your using linode
+// Linode ----------------- //
 
 //provider "linode" {
 //  region = "us-east-1"
 //}
 
-// if your using cloudflare
+// Cloudflare ------------- //
 
 //provider "cloudflare" {
 //  region = "us-east-1"
 //}
 
-// if your using vultr
+// Vultr ------------------ //
 
 //provider "vultr" {
 //  region = "us-east-1"
