@@ -1,0 +1,26 @@
+# Development Environment Configuration
+# Copy this file to dev.tfvars and customize
+
+environment  = "dev"
+project_name = "aegisnet"
+
+# AWS Configuration
+aws_region = "us-east-1"
+vpc_cidr   = "10.0.0.0/16"
+
+# Google Cloud Configuration
+google_project = "aegisnet-dev"
+google_region  = "us-central1"
+google_zone    = "us-central1-a"
+
+# Azure Configuration
+azure_location = "eastus"
+
+# DigitalOcean Configuration
+digitalocean_region = "nyc1"
+
+# Network Configuration for Development
+# (Smaller subnets for dev)
+# azs                  = ["us-east-1a", "us-east-1b"]
+# private_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+# public_subnet_cidrs  = ["10.0.101.0/24", "10.0.102.0/24"]
