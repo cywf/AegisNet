@@ -1,0 +1,43 @@
+# Kustomization for Development Environment
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../deployment.yaml
+  - ../../ingress.yaml
+
+namespace: aegisnet-dev
+
+# Add dev suffix to resource names
+nameSuffix: -dev
+
+# Development-specific labels
+commonLabels:
+  environment: dev
+
+# Replica count for dev (fewer replicas)
+replicas:
+  - name: aegisnet-app
+    count: 1
+
+# Development-specific configuration
+configMapGenerator:
+  - name: aegisnet-config
+    behavior: merge
+    literals:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=DEBUG
+      - ENABLE_DEBUG=true
+
+# HPA adjustments for dev
+patches:
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: aegisnet-hpa
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 3

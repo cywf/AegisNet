@@ -1,0 +1,58 @@
+# Kustomization for Production Environment
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../deployment.yaml
+  - ../../ingress.yaml
+
+namespace: aegisnet
+
+# Production-specific labels
+commonLabels:
+  environment: production
+
+# Replica count for production (HA)
+replicas:
+  - name: aegisnet-app
+    count: 3
+
+# Production-specific configuration
+configMapGenerator:
+  - name: aegisnet-config
+    behavior: merge
+    literals:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=INFO
+      - ENABLE_DEBUG=false
+
+# Production resource adjustments
+patches:
+  - target:
+      kind: Deployment
+      name: aegisnet-app
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/memory
+        value: 512Mi
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 500m
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: 1Gi
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/cpu
+        value: 1000m
+  
+  # Production HPA with higher limits
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: aegisnet-hpa
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 3
+      - op: replace
+        path: /spec/maxReplicas
+        value: 20

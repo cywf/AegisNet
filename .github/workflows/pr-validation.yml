@@ -1,0 +1,56 @@
+name: PR Validation
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+jobs:
+  validate-pr:
+    name: Validate Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: Validate YAML files
+        run: |
+          echo "Validating YAML files..."
+          python3 -c "
+          import yaml
+          import sys
+          from pathlib import Path
+          errors = []
+          # Check docker-compose.yml
+          try:
+              with open('docker-compose.yml') as f:
+                  yaml.safe_load(f)
+              print('\u2713 docker-compose.yml is valid')
+          except Exception as e:
+              errors.append(f'\u2717 docker-compose.yml: {e}')
+          # Check Kubernetes manifests
+          k8s_files = list(Path('infra/kubernetes').rglob('*.yaml'))
+          for file in k8s_files:
+              try:
+                  with open(file) as f:
+                      list(yaml.safe_load_all(f))
+                  print(f'\u2713 {file} is valid')
+              except Exception as e:
+                  errors.append(f'\u2717 {file}: {e}')
+          if errors:
+              print('\nErrors found:')
+              for error in errors:
+                  print(error)
+              sys.exit(1)
+          else:
+              print('\nAll YAML files are valid!')
+          "
+      - name: Validate Shell Scripts
+        run: |
+          echo "Validating shell scripts..."
+          for script in scripts/*.sh; do
+            if [ -f "$script" ]; then
+              echo "Checking $script..."
+              bash -n "$script" && echo "\u2713 $script is valid" || exit 1
+            fi
+          done

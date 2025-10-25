@@ -1,0 +1,29 @@
+# Production Environment Configuration
+# Copy this file to prod.tfvars and customize
+# IMPORTANT: Store sensitive values in environment variables or secret managers
+
+environment  = "prod"
+project_name = "aegisnet"
+
+# AWS Configuration
+aws_region = "us-east-1"
+vpc_cidr   = "10.0.0.0/16"
+
+# Google Cloud Configuration
+google_project = "aegisnet-prod"
+google_region  = "us-central1"
+google_zone    = "us-central1-c"
+
+# Azure Configuration
+azure_location = "eastus"
+
+# DigitalOcean Configuration
+digitalocean_region = "nyc1"
+
+# Network Configuration for Production
+# (Full 3-AZ deployment)
+# azs                  = ["us-east-1a", "us-east-1b", "us-east-1c"]
+# private_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+# public_subnet_cidrs  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+# enable_nat_gateway   = true
+# enable_vpn_gateway   = true

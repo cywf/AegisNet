@@ -1,0 +1,110 @@
+version: '3.8'
+
+services:
+  # AegisNet Main Application
+  aegisnet-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: aegisnet-app
+    hostname: aegisnet-app
+    restart: unless-stopped
+    environment:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./:/app
+      - aegisnet-data:/data
+    networks:
+      - aegisnet-network
+    # ports:
+    #   - "8080:8080"
+    
+  # FreeTAKServer - Situational Awareness
+  # Uncomment when ready to deploy
+  # freetakserver:
+  #   image: freetakteam/freetakserver:latest
+  #   container_name: freetakserver
+  #   restart: unless-stopped
+  #   environment:
+  #     - FTS_CONFIG_PATH=/config
+  #   volumes:
+  #     - fts-data:/data
+  #     - fts-config:/config
+  #   networks:
+  #     - aegisnet-network
+  #   ports:
+  #     - "8087:8087"
+  #     - "8089:8089"
+
+  # PostgreSQL Database (for data persistence)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: aegisnet-postgres
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_USER=aegisnet
+  #     - POSTGRES_PASSWORD=${DB_PASSWORD:-changeme}
+  #     - POSTGRES_DB=aegisnet
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - aegisnet-network
+  #   ports:
+  #     - "5432:5432"
+
+  # Redis Cache
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: aegisnet-redis
+  #   restart: unless-stopped
+  #   networks:
+  #     - aegisnet-network
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis-data:/data
+
+  # Monitoring - Prometheus
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: aegisnet-prometheus
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./infra/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+  #     - prometheus-data:/prometheus
+  #   networks:
+  #     - aegisnet-network
+  #   ports:
+  #     - "9090:9090"
+
+  # Monitoring - Grafana
+  # grafana:
+  #   image: grafana/grafana:latest
+  #   container_name: aegisnet-grafana
+  #   restart: unless-stopped
+  #   environment:
+  #     - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   networks:
+  #     - aegisnet-network
+  #   ports:
+  #     - "3000:3000"
+
+networks:
+  aegisnet-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  aegisnet-data:
+  # fts-data:
+  # fts-config:
+  # postgres-data:
+  # redis-data:
+  # prometheus-data:
+  # grafana-data:
