@@ -1,0 +1,112 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  validate-pr:
+    name: Validate Pull Request
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Validate YAML files
+      run: |
+        echo "Validating YAML files..."
+        python3 -c "
+        import yaml
+        import sys
+        from pathlib import Path
+        
+        errors = []
+        
+        # Check docker-compose.yml
+        try:
+            with open('docker-compose.yml') as f:
+                yaml.safe_load(f)
+            print('✓ docker-compose.yml is valid')
+        except Exception as e:
+            errors.append(f'✗ docker-compose.yml: {e}')
+        
+        # Check Kubernetes manifests
+        k8s_files = list(Path('infra/kubernetes').rglob('*.yaml'))
+        for file in k8s_files:
+            try:
+                with open(file) as f:
+                    list(yaml.safe_load_all(f))
+                print(f'✓ {file} is valid')
+            except Exception as e:
+                errors.append(f'✗ {file}: {e}')
+        
+        if errors:
+            print('\nErrors found:')
+            for error in errors:
+                print(error)
+            sys.exit(1)
+        else:
+            print('\nAll YAML files are valid!')
+        "
+
+    - name: Validate Shell Scripts
+      run: |
+        echo "Validating shell scripts..."
+        for script in scripts/*.sh; do
+          if [ -f "$script" ]; then
+            echo "Checking $script..."
+            bash -n "$script" && echo "✓ $script is valid" || exit 1
+          fi
+        done
+
+    - name: Check for secrets
+      run: |
+        echo "Checking for potential secrets..."
+        # Basic check for common secret patterns
+        if grep -r -i -E "password\s*=\s*['\"][^'\"]{8,}|api[_-]?key\s*=\s*['\"][^'\"]{20,}" . --exclude-dir={.git,node_modules} --exclude="*.md" --exclude="*.example"; then
+          echo "⚠️  Warning: Potential secrets detected. Please review."
+          exit 1
+        fi
+        echo "✓ No obvious secrets detected"
+
+    - name: Validate Markdown Links
+      uses: gaurav-nelson/github-action-markdown-link-check@v1
+      with:
+        use-quiet-mode: 'yes'
+        config-file: '.github/markdown-link-check-config.json'
+      continue-on-error: true
+
+    - name: PR Size Check
+      run: |
+        FILES_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)
+        echo "Files changed: $FILES_CHANGED"
+        if [ $FILES_CHANGED -gt 50 ]; then
+          echo "⚠️  Warning: This PR changes more than 50 files. Consider splitting into smaller PRs."
+        fi
+
+    - name: Comment PR
+      if: always()
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const output = `## PR Validation Results
+          
+          ✅ Automated checks completed
+          
+          Please ensure:
+          - [ ] Code follows project conventions
+          - [ ] Documentation is updated
+          - [ ] Tests pass locally
+          - [ ] No secrets are committed
+          
+          *This is an automated check. Review the workflow output for details.*`;
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: output
+          })
