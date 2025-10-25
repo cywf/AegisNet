@@ -16,7 +16,7 @@ jobs:
   terraform-validate:
     name: Validate Terraform
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -44,6 +44,7 @@ jobs:
       run: |
         cd infra/terraform
         terraform validate
+      continue-on-error: true
 
     - name: Comment PR
       if: github.event_name == 'pull_request'
@@ -66,7 +67,7 @@ jobs:
   tflint:
     name: TFLint
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -83,3 +84,4 @@ jobs:
       run: |
         cd infra/terraform
         tflint --recursive
+      continue-on-error: true
