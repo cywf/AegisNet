@@ -69,5 +69,5 @@ jobs:
     - name: Test Docker image
       if: github.event_name == 'pull_request'
       run: |
-        docker-compose -f docker-compose.yml build
-        docker-compose -f docker-compose.yml config
+        docker compose -f docker-compose.yml build
+        docker compose -f docker-compose.yml config
