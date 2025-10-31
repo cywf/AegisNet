@@ -85,3 +85,6 @@ htmlcov/
 
 # CI/CD
 .github/workflows/*.local.yml
+
+# Generated mindmap
+markmap/

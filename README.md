@@ -51,6 +51,17 @@ See the [Deployment Guide](docs/DEPLOYMENT.md) for detailed instructions.
 - **[Kubernetes Guide](infra/kubernetes/README.md)** - Container orchestration
 - **[Roadmap](docs/roadmap.md)** - Project timeline and milestones
 
+## 🗺️ Live Codebase Mindmap
+
+Auto-generated on each push: **repo-map.html** (via GitHub Pages and CI artifact).
+
+When Pages is enabled, it will be served at: `https://cywf.github.io/AegisNet/repo-map.html`
+
+The interactive mindmap provides a visual overview of the repository structure, including:
+- Directory tree visualization
+- Language distribution statistics
+- Expandable/collapsible nodes for easy navigation
+
 ## 🛠️ Technologies
 
 AegisNet incorporates the following technologies:
