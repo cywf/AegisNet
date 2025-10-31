@@ -71,10 +71,10 @@ async function walk(dir, depth = 0) {
   let md = "";
   for (const e of entries) {
     if (e.name === ".DS_Store" || IGNORES.has(e.name)) continue;
-    if (totalEntries++ > MAX_ENTRIES) break;
+    if (totalEntries >= MAX_ENTRIES) break;
+    totalEntries++;
 
     const full = path.join(dir, e.name);
-    const rel = path.relative(root, full);
 
     if (e.isDirectory()) {
       md += `${"  ".repeat(depth)}- **${e.name}/**\n`;
