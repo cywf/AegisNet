@@ -1,0 +1,54 @@
+sequenceDiagram
+actor Dev
+participant GitHub
+participant Runner
+Dev->>GitHub: triggers "Docker Build and Push"
+GitHub->>Runner: dispatch
+loop Docker Build and Push
+Runner->>Runner: job build-and-push
+Runner-->>Runner: Checkout code
+Runner-->>Runner: Set up Docker Buildx
+Runner-->>Runner: Log in to Container Registry
+Runner-->>Runner: Extract metadata
+Runner-->>Runner: Build and push Docker image
+Runner-->>Runner: Test Docker image
+end
+Dev->>GitHub: triggers "Codebase Mindmap"
+GitHub->>Runner: dispatch
+loop Codebase Mindmap
+Runner->>Runner: job build
+Runner-->>Runner: Checkout
+Runner-->>Runner: Setup Node.js
+Runner-->>Runner: Install markmap-cli
+Runner-->>Runner: Generate Markdown map
+Runner-->>Runner: Build Markmap HTML
+Runner-->>Runner: Upload artifact (downloadable)
+Runner-->>Runner: Upload Pages artifact
+Runner->>Runner: job deploy
+Runner-->>Runner: Deploy to GitHub Pages
+end
+Dev->>GitHub: triggers "PR Validation"
+GitHub->>Runner: dispatch
+loop PR Validation
+Runner->>Runner: job validate-pr
+Runner-->>Runner: Checkout code
+Runner-->>Runner: Install PyYAML
+Runner-->>Runner: Validate YAML files
+Runner-->>Runner: Validate Shell Scripts
+end
+Dev->>GitHub: triggers "Security Scanning"
+GitHub->>Runner: dispatch
+loop Security Scanning
+Runner->>Runner: job trivy-scan
+Runner-->>Runner: Checkout code
+Runner-->>Runner: Run Trivy vulnerability scanner in repo mode
+Runner-->>Runner: Upload Trivy results to GitHub Security
+Runner->>Runner: job docker-scan
+Runner-->>Runner: Checkout code
+Runner-->>Runner: Build Docker image
+Runner-->>Runner: Run Trivy on Docker image
+Runner-->>Runner: Upload Docker scan results
+Runner->>Runner: job secret-scan
+Runner-->>Runner: Checkout code
+Runner-->>Runner: TruffleHog OSS
+end
