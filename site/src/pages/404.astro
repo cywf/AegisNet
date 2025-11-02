@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Layout title="404 - Page Not Found">
+  <div class="hero min-h-[60vh]">
+    <div class="hero-content text-center">
+      <div class="max-w-md">
+        <h1 class="text-9xl font-bold">404</h1>
+        <p class="text-2xl font-semibold py-6">Page Not Found</p>
+        <p class="mb-6">
+          Sorry, the page you're looking for doesn't exist or has been moved.
+        </p>
+        <div class="flex gap-3 justify-center">
+          <a href={`${base}/`} class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            Go Home
+          </a>
+          <a href="https://github.com/cywf/AegisNet/issues" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+            Report Issue
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

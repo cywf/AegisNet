@@ -1,0 +1,19 @@
+architecture-beta
+group compose(cloud)[Docker Compose]
+group k8s(cloud)[Kubernetes]
+group tf(cloud)[Terraform]
+service svc_aegisnet_app(server)[aegisnet-app] in compose
+service svc_build(server)[build] in compose
+service svc_environment(server)[environment] in compose
+service svc_volumes(server)[volumes] in compose
+service svc_networks(server)[networks] in compose
+service Namespace_aegisnet(server)[Namespace: aegisnet] in k8s
+service ConfigMap_aegisnet_config(server)[ConfigMap: aegisnet-config] in k8s
+service Secret_aegisnet_secrets(server)[Secret: aegisnet-secrets] in k8s
+service Deployment_aegisnet_app(server)[Deployment: aegisnet-app] in k8s
+service Service_aegisnet_service(server)[Service: aegisnet-service] in k8s
+service HorizontalPodAutoscaler_aegisnet_hpa(server)[HorizontalPodAutoscaler: aegisnet-hpa] in k8s
+service Ingress_aegisnet_ingress(server)[Ingress: aegisnet-ingress] in k8s
+service google_compute_instance_main(database)[google_compute_instance.main] in tf
+service google_storage_bucket_main(database)[google_storage_bucket.main] in tf
+service google_storage_bucket_iam_member_member(database)[google_storage_bucket_iam_member.member] in tf

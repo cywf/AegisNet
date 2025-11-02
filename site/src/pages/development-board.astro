@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DevBoard from '../components/DevelopmentBoard';
+---
+
+<Layout title="Development Board - AegisNet" description="Project development status and task board">
+  <div class="space-y-6">
+    <div class="prose max-w-none">
+      <h1>Development Board</h1>
+      <p>Track project progress and view current development tasks organized by status.</p>
+    </div>
+    
+    <DevBoard client:load />
+  </div>
+</Layout>
