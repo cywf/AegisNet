@@ -1,0 +1,111 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const repoUrl = 'https://github.com/cywf/AegisNet';
+const issueTemplates = [
+  {
+    title: 'Bug Report',
+    description: 'Report a bug or unexpected behavior',
+    url: `${repoUrl}/issues/new?template=bug_report.md&labels=bug`,
+    icon: 'M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z',
+    color: 'error',
+  },
+  {
+    title: 'Feature Request',
+    description: 'Suggest a new feature or enhancement',
+    url: `${repoUrl}/issues/new?template=feature_request.md&labels=enhancement`,
+    icon: 'M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+    color: 'success',
+  },
+  {
+    title: 'Documentation',
+    description: 'Improve or add documentation',
+    url: `${repoUrl}/issues/new?title=[DOCS]&labels=documentation`,
+    icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253',
+    color: 'info',
+  },
+  {
+    title: 'Question',
+    description: 'Ask a question or seek help',
+    url: `${repoUrl}/issues/new?title=[QUESTION]&labels=question`,
+    icon: 'M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    color: 'warning',
+  },
+  {
+    title: 'Security Issue',
+    description: 'Report a security vulnerability (private)',
+    url: `${repoUrl}/security/advisories/new`,
+    icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+    color: 'error',
+    highlight: true,
+  },
+  {
+    title: 'General Issue',
+    description: 'Open a blank issue',
+    url: `${repoUrl}/issues/new`,
+    icon: 'M12 4v16m8-8H4',
+    color: 'neutral',
+  },
+];
+---
+
+<Layout title="Create Issue - AegisNet" description="Create a new issue or report a problem">
+  <div class="space-y-8">
+    <div class="prose max-w-none">
+      <h1>Create Issue</h1>
+      <p>Choose the type of issue you'd like to create. You'll be redirected to GitHub where you can provide more details.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {issueTemplates.map((template) => (
+        <a
+          href={template.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`card bg-base-200 shadow-xl hover:shadow-2xl transition-all ${template.highlight ? 'ring-2 ring-error' : ''}`}
+        >
+          <div class="card-body">
+            <div class={`text-${template.color} mb-3`}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12">
+                <path stroke-linecap="round" stroke-linejoin="round" d={template.icon} />
+              </svg>
+            </div>
+            <h2 class="card-title">{template.title}</h2>
+            <p class="text-sm opacity-70">{template.description}</p>
+            {template.highlight && (
+              <div class="badge badge-error gap-2 mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Private
+              </div>
+            )}
+            <div class="card-actions justify-end mt-4">
+              <button class={`btn btn-${template.color} btn-sm`}>
+                Create
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="alert alert-info">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <div>
+        <h3 class="font-bold">Before creating an issue:</h3>
+        <ul class="text-sm mt-1">
+          <li>Search existing issues to avoid duplicates</li>
+          <li>Provide as much detail as possible</li>
+          <li>For security issues, use the private security advisory option</li>
+          <li>You can also start a <a href={`${repoUrl}/discussions`} class="link" target="_blank" rel="noopener noreferrer">discussion</a> for questions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -11,6 +11,19 @@ Note: for research purposes only
 
 ![alt-text](assets/aegisnet.png)
 
+## 🌐 Live Site
+
+**[Visit the AegisNet Website](https://cywf.github.io/AegisNet/)**
+
+The live site features:
+- **Project Information** - Overview, quick start, and tech stack
+- **Statistics** - Repository metrics and activity charts
+- **Discussions** - Browse community discussions
+- **Development Board** - Track project progress
+- **Documentation** - Comprehensive guides and docs
+- **Visualizer** - Interactive Mermaid diagrams
+- **Dark/Neon Themes** - 7 user-selectable themes
+
 ## Overview
 
 AegisNet is an advanced defense product solution that integrates several cutting-edge technologies. Our goal is to provide a comprehensive system that combines situational awareness, advanced detection surveillance, autonomous drone software, and more into a unified platform.
@@ -45,17 +58,49 @@ See the [Deployment Guide](docs/DEPLOYMENT.md) for detailed instructions.
 
 ## 📋 Documentation
 
+Access documentation through:
+- **[Live Documentation Site](https://cywf.github.io/AegisNet/docs)** - Interactive documentation browser
 - **[Deployment Guide](docs/DEPLOYMENT.md)** - Complete deployment instructions
 - **[Architecture](docs/ARCHITECTURE.md)** - System architecture and design
 - **[Terraform Guide](infra/terraform/README.md)** - Infrastructure as Code
 - **[Kubernetes Guide](infra/kubernetes/README.md)** - Container orchestration
 - **[Roadmap](docs/roadmap.md)** - Project timeline and milestones
 
+### Adding Documentation
+
+To add new documentation:
+1. Create a Markdown file in the `/docs/` directory
+2. The file will automatically appear on the [documentation page](https://cywf.github.io/AegisNet/docs)
+3. CI will process and display it with proper formatting and navigation
+
+## 🗺️ Project Diagrams
+
+### Adding Mermaid Diagrams
+
+To add new Mermaid diagrams:
+1. Create a `.mmd` file in the `/mermaid/` directory
+2. The diagram will automatically appear on the [visualizer page](https://cywf.github.io/AegisNet/visualizer)
+3. CI will copy and index it for interactive viewing
+
+Example diagram structure:
+```mermaid
+graph TD
+    A[Start] --> B[Process]
+    B --> C[End]
+```
+
+Existing diagrams:
+- `architecture.mmd` - System architecture
+- `flowchart.mmd` - Process flows
+- `er.mmd` - Entity relationships
+- `ci-sequence.mmd` - CI/CD sequence
+- `bpmnish.mmd` - Business process
+
 ## 🗺️ Live Codebase Mindmap
 
 Auto-generated on each push: **repo-map.html** (via GitHub Pages and CI artifact).
 
-When Pages is enabled, it will be served at: `https://cywf.github.io/AegisNet/repo-map.html`
+Access at: `https://cywf.github.io/AegisNet/repo-map.html`
 
 The interactive mindmap provides a visual overview of the repository structure, including:
 - Directory tree visualization
@@ -109,20 +154,70 @@ AegisNet supports multiple deployment models:
 ```
 AegisNet/
 ├── .github/workflows/    # CI/CD pipelines
+│   └── pages.yml        # GitHub Pages deployment
 ├── docs/                 # Documentation
 ├── infra/               # Infrastructure as Code
 │   ├── kubernetes/      # Kubernetes manifests
 │   └── terraform/       # Terraform configurations
+├── mermaid/             # Mermaid diagram files (.mmd)
 ├── scripts/             # Deployment and utility scripts
+├── site/                # Website source (Astro + React)
+│   ├── public/          # Static assets and data snapshots
+│   ├── scripts/         # Data fetching scripts
+│   └── src/             # Site source code
 ├── Dockerfile           # Container definition
 ├── docker-compose.yml   # Local development setup
 ├── Makefile            # Common operations
 └── README.md           # This file
 ```
 
+## 🔄 CI/CD Data Snapshots
+
+The website automatically fetches and displays live data from GitHub through CI/CD pipelines:
+
+### Data Sources
+
+1. **Repository Statistics** (`site/public/data/stats.json`)
+   - Stars, forks, watchers count
+   - Programming language breakdown
+   - 12-week commit activity histogram
+   - Updated on every deployment
+
+2. **Discussions** (`site/public/data/discussions.json`)
+   - Latest 25 community discussions
+   - Includes title, author, category, and creation date
+   - Links directly to GitHub discussions
+
+3. **Project Board** (`site/public/data/projects.json`)
+   - GitHub Projects v2 items with status
+   - Fallback to issues grouped by status labels
+   - Kanban board visualization
+
+4. **Packages** (`site/public/data/packages.json`)
+   - GitHub Packages metadata (optional)
+   - Container registry information
+
+### How It Works
+
+The `.github/workflows/pages.yml` workflow:
+1. Runs data fetching scripts using `GITHUB_TOKEN`
+2. Generates JSON snapshots in `site/public/data/`
+3. Copies Mermaid diagrams to `site/public/diagrams/`
+4. Builds the Astro site with fresh data
+5. Deploys to GitHub Pages
+
+All data fetching happens server-side during build - no tokens are exposed client-side.
+
 ## 🎯 Common Commands
 
 ```bash
+# Website development (in site/ directory)
+npm run dev          # Start dev server at localhost:4321
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run fetch-data   # Fetch fresh data from GitHub API
+npm run copy-diagrams # Copy Mermaid diagrams to public
+
 # Local development
 make dev          # Start local development environment
 make logs         # View logs from all services

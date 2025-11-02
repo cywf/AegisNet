@@ -1,0 +1,169 @@
+---
+import ThemeSwitcher from '../components/ThemeSwitcher';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'AegisNet', description = 'Advanced defense product solution' } = Astro.props;
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+
+const navItems = [
+  { href: `${base}/`, label: 'Home' },
+  { href: `${base}/statistics`, label: 'Statistics' },
+  { href: `${base}/discussions`, label: 'Discussions' },
+  { href: `${base}/development-board`, label: 'Dev Board' },
+  { href: `${base}/create-issue`, label: 'Create Issue' },
+  { href: `${base}/docs`, label: 'Docs' },
+  { href: `${base}/visualizer`, label: 'Visualizer' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <script is:inline>
+      // Prevent flash of unstyled content
+      (function() {
+        const defaultTheme = 'nightfall';
+        const theme = localStorage.getItem('theme') || defaultTheme;
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 btn btn-primary">
+      Skip to content
+    </a>
+
+    <div class="drawer lg:drawer-open">
+      <input id="drawer-toggle" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex flex-col">
+        <!-- Navbar -->
+        <div class="navbar bg-base-200 sticky top-0 z-40 shadow-lg">
+          <div class="flex-none lg:hidden">
+            <label for="drawer-toggle" aria-label="Open menu" class="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </label>
+          </div>
+          <div class="flex-1 px-2 mx-2">
+            <a href={`${base}/`} class="text-xl font-bold">AegisNet</a>
+          </div>
+          <div class="flex-none">
+            <ThemeSwitcher client:load />
+          </div>
+        </div>
+
+        <!-- Breadcrumbs -->
+        {currentPath !== base + '/' && currentPath !== base && (
+          <div class="text-sm breadcrumbs px-6 py-4 bg-base-100">
+            <ul>
+              <li><a href={`${base}/`}>Home</a></li>
+              {currentPath.split('/').filter(Boolean).slice(base.split('/').filter(Boolean).length).map((segment, i, arr) => {
+                const path = `${base}/${arr.slice(0, i + 1).join('/')}`;
+                const isLast = i === arr.length - 1;
+                return (
+                  <li>
+                    {isLast ? (
+                      <span class="capitalize">{segment.replace(/-/g, ' ')}</span>
+                    ) : (
+                      <a href={path} class="capitalize">{segment.replace(/-/g, ' ')}</a>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        <!-- Main content -->
+        <main id="main-content" class="flex-1 p-6">
+          <slot />
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer footer-center p-10 bg-base-200 text-base-content">
+          <div>
+            <p class="font-bold">AegisNet</p>
+            <p>Advanced defense product solution</p>
+            <p>Copyright © {new Date().getFullYear()} - All rights reserved</p>
+          </div>
+          <div>
+            <div class="grid grid-flow-col gap-4">
+              <a href="https://github.com/cywf/AegisNet" target="_blank" rel="noopener noreferrer" class="link link-hover">
+                GitHub
+              </a>
+              <a href="https://github.com/cywf/AegisNet/issues" target="_blank" rel="noopener noreferrer" class="link link-hover">
+                Issues
+              </a>
+              <a href="https://github.com/cywf/AegisNet/discussions" target="_blank" rel="noopener noreferrer" class="link link-hover">
+                Discussions
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Sidebar navigation -->
+      <div class="drawer-side z-50">
+        <label for="drawer-toggle" aria-label="Close menu" class="drawer-overlay"></label>
+        <aside class="bg-base-200 w-80 min-h-screen">
+          <div class="sticky top-0">
+            <div class="p-4 font-bold text-xl border-b border-base-300">
+              Navigation
+            </div>
+            <ul class="menu p-4 text-base-content">
+              {navItems.map((item) => (
+                <li>
+                  <a 
+                    href={item.href}
+                    class={currentPath === item.href || currentPath === item.href + '/' ? 'active' : ''}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only.focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+</style>

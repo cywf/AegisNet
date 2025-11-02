@@ -1,0 +1,133 @@
+flowchart TB
+classDef dir fill:#eef,stroke:#99c,stroke-width:1px;
+d__["AegisNet/"]:::dir
+f__editorconfig[".editorconfig"]
+f__env_example[".env.example"]
+f__gitignore[".gitignore"]
+f__markmapignore[".markmapignore"]
+f__mermaidignore[".mermaidignore"]
+f__pre_commit_config_yaml[".pre-commit-config.yaml"]
+d_assets["assets/"]:::dir
+f_CHANGELOG_md["CHANGELOG.md"]
+f_CONTRIBUTING_md["CONTRIBUTING.md"]
+f_docker_compose_yml["docker-compose.yml"]
+f_Dockerfile["Dockerfile"]
+d_docs["docs/"]:::dir
+f_docs_ARCHITECTURE_md["ARCHITECTURE.md"]
+f_docs_DEPLOYMENT_md["DEPLOYMENT.md"]
+f_docs_IMPLEMENTATION_SUMMARY_md["IMPLEMENTATION_SUMMARY.md"]
+f_docs_roadmap_md["roadmap.md"]
+d_infra["infra/"]:::dir
+d_infra_kubernetes["kubernetes/"]:::dir
+f_infra_kubernetes_deployment_yaml["deployment.yaml"]
+f_infra_kubernetes_ingress_yaml["ingress.yaml"]
+d_infra_kubernetes_overlays["overlays/"]:::dir
+d_infra_kubernetes_overlays_dev["dev/"]:::dir
+f_infra_kubernetes_overlays_dev_kustomization_yaml["kustomization.yaml"]
+d_infra_kubernetes_overlays_prod["prod/"]:::dir
+f_infra_kubernetes_overlays_prod_kustomization_yaml["kustomization.yaml"]
+f_infra_kubernetes_README_md["README.md"]
+f_infra_README_md["README.md"]
+d_infra_terraform["terraform/"]:::dir
+f_infra_terraform_backend_tf["backend.tf"]
+f_infra_terraform_dev_tfvars_example["dev.tfvars.example"]
+f_infra_terraform_main_tf["main.tf"]
+d_infra_terraform_modules["modules/"]:::dir
+d_infra_terraform_modules_compute["compute/"]:::dir
+f_infra_terraform_modules_compute_main_tf["main.tf"]
+f_infra_terraform_modules_compute_outputs_tf["outputs.tf"]
+f_infra_terraform_modules_compute_variables_tf["variables.tf"]
+d_infra_terraform_modules_network["network/"]:::dir
+f_infra_terraform_modules_network_main_tf["main.tf"]
+f_infra_terraform_modules_network_outputs_tf["outputs.tf"]
+f_infra_terraform_modules_network_variables_tf["variables.tf"]
+d_infra_terraform_modules_storage["storage/"]:::dir
+f_infra_terraform_modules_storage_main_tf["main.tf"]
+f_infra_terraform_modules_storage_outputs_tf["outputs.tf"]
+f_infra_terraform_modules_storage_variables_tf["variables.tf"]
+f_infra_terraform_outputs_tf["outputs.tf"]
+f_infra_terraform_prod_tfvars_example["prod.tfvars.example"]
+f_infra_terraform_providers_tf["providers.tf"]
+f_infra_terraform_README_md["README.md"]
+f_infra_terraform_variables_tf["variables.tf"]
+f_infra_terraform_versions_tf["versions.tf"]
+f_LICENSE["LICENSE"]
+f_Makefile["Makefile"]
+d_mermaid["mermaid/"]:::dir
+f_mermaid_architecture_mmd["architecture.mmd"]
+f_mermaid_bpmnish_mmd["bpmnish.mmd"]
+f_mermaid_ci_sequence_mmd["ci-sequence.mmd"]
+f_mermaid_er_mmd["er.mmd"]
+f_mermaid_flowchart_mmd["flowchart.mmd"]
+f_README_md["README.md"]
+d_scripts["scripts/"]:::dir
+f_scripts_deploy_cloud_sh["deploy-cloud.sh"]
+f_scripts_generate_markmap_mjs["generate-markmap.mjs"]
+f_scripts_generate_mermaid_mjs["generate-mermaid.mjs"]
+f_scripts_setup_local_sh["setup-local.sh"]
+f_SECURITY_md["SECURITY.md"]
+d__ --> f__editorconfig
+d__ --> f__env_example
+d__ --> f__gitignore
+d__ --> f__markmapignore
+d__ --> f__mermaidignore
+d__ --> f__pre_commit_config_yaml
+d__ --> d_assets
+d__ --> f_CHANGELOG_md
+d__ --> f_CONTRIBUTING_md
+d__ --> f_docker_compose_yml
+d__ --> f_Dockerfile
+d__ --> d_docs
+d_docs --> f_docs_ARCHITECTURE_md
+d_docs --> f_docs_DEPLOYMENT_md
+d_docs --> f_docs_IMPLEMENTATION_SUMMARY_md
+d_docs --> f_docs_roadmap_md
+d__ --> d_infra
+d_infra --> d_infra_kubernetes
+d_infra_kubernetes --> f_infra_kubernetes_deployment_yaml
+d_infra_kubernetes --> f_infra_kubernetes_ingress_yaml
+d_infra_kubernetes --> d_infra_kubernetes_overlays
+d_infra_kubernetes_overlays --> d_infra_kubernetes_overlays_dev
+d_infra_kubernetes_overlays_dev --> f_infra_kubernetes_overlays_dev_kustomization_yaml
+d_infra_kubernetes_overlays --> d_infra_kubernetes_overlays_prod
+d_infra_kubernetes_overlays_prod --> f_infra_kubernetes_overlays_prod_kustomization_yaml
+d_infra_kubernetes --> f_infra_kubernetes_README_md
+d_infra --> f_infra_README_md
+d_infra --> d_infra_terraform
+d_infra_terraform --> f_infra_terraform_backend_tf
+d_infra_terraform --> f_infra_terraform_dev_tfvars_example
+d_infra_terraform --> f_infra_terraform_main_tf
+d_infra_terraform --> d_infra_terraform_modules
+d_infra_terraform_modules --> d_infra_terraform_modules_compute
+d_infra_terraform_modules_compute --> f_infra_terraform_modules_compute_main_tf
+d_infra_terraform_modules_compute --> f_infra_terraform_modules_compute_outputs_tf
+d_infra_terraform_modules_compute --> f_infra_terraform_modules_compute_variables_tf
+d_infra_terraform_modules --> d_infra_terraform_modules_network
+d_infra_terraform_modules_network --> f_infra_terraform_modules_network_main_tf
+d_infra_terraform_modules_network --> f_infra_terraform_modules_network_outputs_tf
+d_infra_terraform_modules_network --> f_infra_terraform_modules_network_variables_tf
+d_infra_terraform_modules --> d_infra_terraform_modules_storage
+d_infra_terraform_modules_storage --> f_infra_terraform_modules_storage_main_tf
+d_infra_terraform_modules_storage --> f_infra_terraform_modules_storage_outputs_tf
+d_infra_terraform_modules_storage --> f_infra_terraform_modules_storage_variables_tf
+d_infra_terraform --> f_infra_terraform_outputs_tf
+d_infra_terraform --> f_infra_terraform_prod_tfvars_example
+d_infra_terraform --> f_infra_terraform_providers_tf
+d_infra_terraform --> f_infra_terraform_README_md
+d_infra_terraform --> f_infra_terraform_variables_tf
+d_infra_terraform --> f_infra_terraform_versions_tf
+d__ --> f_LICENSE
+d__ --> f_Makefile
+d__ --> d_mermaid
+d_mermaid --> f_mermaid_architecture_mmd
+d_mermaid --> f_mermaid_bpmnish_mmd
+d_mermaid --> f_mermaid_ci_sequence_mmd
+d_mermaid --> f_mermaid_er_mmd
+d_mermaid --> f_mermaid_flowchart_mmd
+d__ --> f_README_md
+d__ --> d_scripts
+d_scripts --> f_scripts_deploy_cloud_sh
+d_scripts --> f_scripts_generate_markmap_mjs
+d_scripts --> f_scripts_generate_mermaid_mjs
+d_scripts --> f_scripts_setup_local_sh
+d__ --> f_SECURITY_md

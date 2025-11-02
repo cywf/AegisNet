@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { marked } from 'marked';
+import fs from 'fs';
+import path from 'path';
+
+// Get all markdown files from docs directory
+const docsDir = path.join(process.cwd(), '../docs');
+const files = fs.readdirSync(docsDir).filter(file => file.endsWith('.md'));
+
+interface DocFile {
+  name: string;
+  title: string;
+  content: string;
+  url: string;
+}
+
+const docs: DocFile[] = [];
+
+for (const file of files) {
+  const filePath = path.join(docsDir, file);
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const title = file.replace('.md', '').replace(/_/g, ' ').replace(/-/g, ' ');
+  const url = `https://github.com/cywf/AegisNet/blob/main/docs/${file}`;
+  
+  // marked.parse returns Promise<string> in v13+, we need to await it or use sync version
+  const htmlContent = await marked.parse(content);
+  
+  docs.push({
+    name: file,
+    title,
+    content: htmlContent,
+    url,
+  });
+}
+
+const selectedDoc = docs[0] || null;
+---
+
+<Layout title="Documentation - AegisNet" description="Project documentation and guides">
+  <div class="space-y-6">
+    <div class="flex justify-between items-center">
+      <div class="prose">
+        <h1>Documentation</h1>
+      </div>
+      {selectedDoc && (
+        <a 
+          href={selectedDoc.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          Open in GitHub
+        </a>
+      )}
+    </div>
+
+    {docs.length === 0 ? (
+      <div class="alert alert-info">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>No documentation files found.</span>
+      </div>
+    ) : (
+      <div class="grid lg:grid-cols-4 gap-6">
+        <!-- Sidebar with doc list -->
+        <div class="lg:col-span-1">
+          <div class="menu bg-base-200 rounded-lg shadow-xl p-4 sticky top-24">
+            <div class="menu-title">
+              <span class="font-bold">Documents</span>
+            </div>
+            <ul>
+              {docs.map((doc) => (
+                <li>
+                  <a href={`#${doc.name}`} class="capitalize">
+                    {doc.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Main content area -->
+        <div class="lg:col-span-3 space-y-8">
+          {docs.map((doc) => (
+            <div id={doc.name} class="card bg-base-200 shadow-xl">
+              <div class="card-body">
+                <div class="flex justify-between items-start mb-4">
+                  <h2 class="card-title capitalize text-2xl">{doc.title}</h2>
+                  <a 
+                    href={doc.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-sm btn-ghost"
+                    title="View on GitHub"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="prose max-w-none" set:html={doc.content} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</Layout>
+
+<style is:global>
+  .prose {
+    color: inherit;
+  }
+  
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    color: inherit;
+    font-weight: 700;
+  }
+  
+  .prose a {
+    color: oklch(var(--p));
+    text-decoration: underline;
+  }
+  
+  .prose a:hover {
+    color: oklch(var(--pf));
+  }
+  
+  .prose code {
+    background-color: oklch(var(--b3));
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+  
+  .prose pre {
+    background-color: oklch(var(--b3));
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  .prose pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5rem;
+  }
+  
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .prose th,
+  .prose td {
+    border: 1px solid oklch(var(--bc) / 0.2);
+    padding: 0.5rem;
+  }
+  
+  .prose th {
+    background-color: oklch(var(--b2));
+    font-weight: 600;
+  }
+  
+  .prose blockquote {
+    border-left: 4px solid oklch(var(--p));
+    padding-left: 1rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
+</style>

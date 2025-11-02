@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import DiscussionsList from '../components/DiscussionsList';
+---
+
+<Layout title="Discussions - AegisNet" description="Community discussions and conversations">
+  <div class="space-y-6">
+    <div class="prose max-w-none">
+      <h1>Community Discussions</h1>
+      <p>Browse and search through recent community discussions and conversations.</p>
+    </div>
+    
+    <DiscussionsList client:load />
+  </div>
+</Layout>

@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StatisticsDisplay from '../components/StatisticsDisplay';
+---
+
+<Layout title="Statistics - AegisNet" description="Repository statistics and metrics">
+  <div class="space-y-6">
+    <div class="prose max-w-none">
+      <h1>Repository Statistics</h1>
+      <p>Real-time metrics and analytics for the AegisNet project.</p>
+    </div>
+    
+    <StatisticsDisplay client:load />
+  </div>
+</Layout>

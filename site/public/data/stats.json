@@ -1,0 +1,11 @@
+{
+  "stars": 3,
+  "forks": 1,
+  "watchers": 2,
+  "languages": {
+    "Shell": 35000,
+    "Makefile": 15000,
+    "Dockerfile": 10000
+  },
+  "commitActivity": [5, 8, 12, 7, 15, 10, 8, 6, 9, 14, 11, 13]
+}

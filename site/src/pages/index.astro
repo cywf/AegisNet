@@ -1,0 +1,195 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const repoUrl = 'https://github.com/cywf/AegisNet';
+---
+
+<Layout title="AegisNet - Project Info" description="Advanced defense product solution integrating cutting-edge technologies">
+  <div class="space-y-8">
+    <!-- Hero Section -->
+    <div class="hero bg-base-200 rounded-lg shadow-xl">
+      <div class="hero-content text-center py-12">
+        <div class="max-w-4xl">
+          <h1 class="text-5xl font-bold mb-4">AegisNet</h1>
+          <p class="text-xl mb-6">Advanced defense product solution</p>
+          
+          <!-- Status Badges -->
+          <div class="flex flex-wrap gap-2 justify-center mb-6">
+            <img src="https://img.shields.io/github/stars/cywf/AegisNet?style=social" alt="Stars" />
+            <img src="https://img.shields.io/github/forks/cywf/AegisNet?style=social" alt="Forks" />
+            <img src="https://img.shields.io/github/watchers/cywf/AegisNet?style=social" alt="Watchers" />
+            <img src="https://img.shields.io/github/issues/cywf/AegisNet" alt="Issues" />
+          </div>
+
+          <!-- Quick Links -->
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a href={`${repoUrl}/issues`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+              </svg>
+              Issues
+            </a>
+            <a href={`${repoUrl}/discussions`} target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+              </svg>
+              Discussions
+            </a>
+            <a href={`${repoUrl}/projects`} target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+              </svg>
+              Projects
+            </a>
+            <a href={`${repoUrl}/releases`} target="_blank" rel="noopener noreferrer" class="btn btn-info">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+              </svg>
+              Releases
+            </a>
+            <a href={`${repoUrl}/blob/main/SECURITY.md`} target="_blank" rel="noopener noreferrer" class="btn btn-warning">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+              </svg>
+              Security
+            </a>
+            <a href={`${repoUrl}/blob/main/docs/roadmap.md`} target="_blank" rel="noopener noreferrer" class="btn btn-success">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width={1.5} stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
+              </svg>
+              Roadmap
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-3xl">Overview</h2>
+        <p class="text-lg">
+          AegisNet is an advanced defense product solution that integrates several cutting-edge technologies. 
+          Our goal is to provide a comprehensive system that combines situational awareness, advanced detection 
+          surveillance, autonomous drone software, and more into a unified platform.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-3xl">🚀 Quick Start</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <h3 class="text-xl font-semibold mb-2">Local Development</h3>
+            <div class="mockup-code">
+              <pre data-prefix="$"><code>git clone https://github.com/cywf/AegisNet.git</code></pre>
+              <pre data-prefix="$"><code>cd AegisNet</code></pre>
+              <pre data-prefix="$"><code>make dev</code></pre>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-2">Cloud Deployment</h3>
+            <div class="mockup-code">
+              <pre data-prefix="$"><code>make deploy</code></pre>
+              <pre data-prefix="$"><code># Or manually</code></pre>
+              <pre data-prefix="$"><code>./scripts/deploy-cloud.sh</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-3xl">🛠️ Technology Stack</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Situational Awareness</div>
+            <div class="stat-value text-2xl">FreeTAKServer</div>
+            <div class="stat-desc">TAK client compatibility</div>
+          </div>
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Detection & Surveillance</div>
+            <div class="stat-value text-2xl">Heimdall</div>
+            <div class="stat-desc">AI/ML facial recognition</div>
+          </div>
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Autonomous Drones</div>
+            <div class="stat-value text-2xl">Prometheus</div>
+            <div class="stat-desc">Open-source platform</div>
+          </div>
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Orchestration</div>
+            <div class="stat-value text-2xl">Kubernetes</div>
+            <div class="stat-desc">Container management</div>
+          </div>
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Infrastructure</div>
+            <div class="stat-value text-2xl">Terraform</div>
+            <div class="stat-desc">Multi-cloud IaC</div>
+          </div>
+          <div class="stat bg-base-300 rounded-lg">
+            <div class="stat-title">Security</div>
+            <div class="stat-value text-2xl">Sentinel</div>
+            <div class="stat-desc">Cyber threat protection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-3xl">🔧 Features</h2>
+        <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">Docker Support</h3>
+              <p class="text-sm opacity-70">Fully containerized architecture</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">Kubernetes Ready</h3>
+              <p class="text-sm opacity-70">Production-grade orchestration</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">Infrastructure as Code</h3>
+              <p class="text-sm opacity-70">Terraform for all major cloud providers</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">CI/CD Pipelines</h3>
+              <p class="text-sm opacity-70">GitHub Actions automation</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">Security Scanning</h3>
+              <p class="text-sm opacity-70">Automated vulnerability detection</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="badge badge-success mt-1">✓</div>
+            <div>
+              <h3 class="font-semibold">Auto-scaling</h3>
+              <p class="text-sm opacity-70">Horizontal pod autoscaling</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
